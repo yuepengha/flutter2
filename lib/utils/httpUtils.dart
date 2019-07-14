@@ -7,6 +7,7 @@ Map<String, dynamic> optHeader = {
 };
 
 var dio = new Dio(BaseOptions(connectTimeout: 30000,
+
     headers: optHeader,
     baseUrl: ''));
 
