@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/utils/shared_preferences.dart';
 import 'package:flutter_app/utils/constance.dart';
+import 'package:flutter_app/start/login.dart';
 
 
 void main() => runApp(MyApp());
@@ -53,10 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
     })
         .then((sp) {
       setState(() {
-//        isLogin = sp.getBool(Contance.loginFlag);
-//        print(sp.getBool(Contance.loginFlag));
+        isLogin = sp.getBool(Contance.loginFlag);
+        isLogin ??= false;
         isLoading = false;
-        isLogin = true;
       });
     });
     super.initState();
@@ -67,7 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
     if (isLoading) {
       return Center(
         child: CircularProgressIndicator(
-
         ),
       );
     } else {
@@ -76,10 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text('登录'),
         );
       } else {
-        return Center(
-          child: Text('注册'),
-
-        );
+        return LoginPage();
       }
     }
   }
