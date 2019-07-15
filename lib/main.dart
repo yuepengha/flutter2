@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/utils/shared_preferences.dart';
 import 'package:flutter_app/utils/constance.dart';
 import 'package:flutter_app/start/login.dart';
+import 'package:flutter_app/utils/httpUtils.dart';
 
 
-void main() => runApp(MyApp());
+void main() {
+  HttpUtils.init();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
 

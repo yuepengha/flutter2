@@ -1,5 +1,5 @@
-import 'package:flutter_app/utils//httpUtils.dart';
-import 'package:flutter_app/sourcedata//api.dart';
+import 'package:flutter_app/utils/httpUtils.dart';
+import 'package:flutter_app/sourcedata/api.dart';
 
 class StartDataSource {
 
