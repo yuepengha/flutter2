@@ -7,6 +7,7 @@ import 'package:flutter_app/utils/httpUtils.dart';
 
 void main() {
   HttpUtils.init();
+
   runApp(MyApp());
 }
 
