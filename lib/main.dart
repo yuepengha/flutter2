@@ -46,22 +46,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isLoading = true;
   bool isLogin = false;
 
   @override
   void initState() {
-    //模拟延时任务
-    Future.delayed(Duration(milliseconds: 1000), () {
-      return "";
-    }).then((a) {
-      return SpUtil.getInstance();
-    })
-        .then((sp) {
+    SpUtil.getInstance().then((sp) {
       setState(() {
         isLogin = sp.getBool(Contance.loginFlag);
         isLogin ??= false;
-        isLoading = false;
       });
     });
     super.initState();
@@ -69,19 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
+    if (isLogin) {
       return Center(
-        child: CircularProgressIndicator(
-        ),
+        child: Text('登录'),
       );
     } else {
-      if (isLogin) {
-        return Center(
-          child: Text('登录'),
-        );
-      } else {
-        return LoginPage();
-      }
+      return LoginPage();
     }
   }
 }

@@ -13,6 +13,7 @@ class LoginPage extends StatefulWidget {
 class LoginState extends State<LoginPage> {
   bool isEnable = true;
   String phone;
+  var code;
 
   @override
   Widget build(BuildContext context) {
@@ -61,21 +62,51 @@ class LoginState extends State<LoginPage> {
               ),
 
               Listener(
-                child: Text('获取验证码', style: TextStyle(
-                    color: isEnable ? Colors.black : Colors.grey),),
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(12, 6, 12, 6),
+                  decoration: BoxDecoration(color: Colors.orange,
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: Text('获取验证码', style: TextStyle(
+                      color: isEnable ? Colors.white : Colors.grey),),
+                ),
+
                 onPointerUp: (pointerUpEvent) {
                   setState(() {
                     isEnable = false;
                   });
-                  var code=StartDataSource.getCode({"mobile": phone});
-                  print(code);
+                  StartDataSource.getCode({"mobile": phone})
+                      .then((onValue) {
+                    print(onValue.toString()+"----------------");
+                  }, onError: () {
+
+                  });
                 },
               ),
             ],
           ),
+
+          Listener(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(50, 8, 50, 8),
+              decoration: BoxDecoration(color: Colors.blue,
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Text(
+                  '登录', style: TextStyle(color: Colors.white, fontSize: 18)),
+              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            ),
+            onPointerDown: (PointerDownEvent event) {
+              login();
+            },
+          ),
+
         ],
       ),
     );
+  }
+
+  void login() {
+    var map = {"mobile": phone,};
+    StartDataSource.loginByAuthCode(map);
   }
 
 }
